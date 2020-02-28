@@ -5,6 +5,8 @@ session_start();
 //iniciar a variavel pagina
 $pagina = 'paginas/login';
 
+//incluir o arquivo de conexao
+include 'config/conexao.php';
 
 ?>
 
@@ -36,6 +38,8 @@ $pagina = 'paginas/login';
     if (!isset($_SESSION['hqs']['id'])) {
         //incluir login
         include $pagina;
+
+        
     }
 
     //se está logado mostrar o nome ou a página que esta tentando visitar
