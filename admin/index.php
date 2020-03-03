@@ -8,6 +8,16 @@ $pagina = 'paginas/login';
 //incluir o arquivo de conexao
 include 'config/conexao.php';
 
+$site = $_SERVER['SERVER_NAME'];
+$porta = $_SERVER['SERVER_PORT'];
+$url = $_SERVER['SCRIPT_NAME'];
+$h = $_SERVER['REQUEST_SCHEME'];
+//http://localhost:8080/hqs/admin/index.php
+// site localhost
+//porta 8888
+//url /hqs/admin/index.php
+$base = "$h://$site:$porta/$url";
+
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +31,8 @@ include 'config/conexao.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <base href="<?= $base ?>">
 
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -38,8 +50,6 @@ include 'config/conexao.php';
     if (!isset($_SESSION['hqs']['id'])) {
         //incluir login
         include $pagina;
-
-        
     }
 
     //se está logado mostrar o nome ou a página que esta tentando visitar
