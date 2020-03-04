@@ -231,6 +231,37 @@ $base     = "$h://$site:$porta/$url";
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
+                        <?php
+                        // adicionar a programação para abrir a página desejada
+                        $pagina = "paginas/home.php";
+
+                        //verificar se o parametro exite
+                        if (isset($_GET['parametro'])) {
+                            //recuperar o parametro
+                            $p = trim($_GET['parametro']);
+
+                            //separar por /
+                            $p = explode('/', $p);
+
+                            $pasta = $p[0];
+
+                            $arquivo = $p[1];
+
+                            $pagina = "$pasta/$arquivo.php";
+
+                            //verificar se o id ou o 3 item existe
+                            if (isset($p[2])) {
+                                $id = $p[2];
+                            }
+                        }
+
+                        //verificar se a página existe
+                        if (file_exists($pagina)) {
+                            include $pagina;
+                        } else {
+                            include 'paginas/404.php';
+                        }
+                        ?>
 
                     </div>
                     <!-- /.container-fluid -->

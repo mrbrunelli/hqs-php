@@ -1,3 +1,12 @@
+<?php
 
+//verificar se não está logado
+if (!isset($_SESSION['hqs']['id'])) {
+    exit;
+}
 
-<a href="../sair.php">Clique aqui para sair</a>
+?>
+
+<div class="container">
+    <h1>Dashboard</h1>
+</div>

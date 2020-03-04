@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 //VERIFICAR SE ESTÁ LOGADO
 if (!isset($_SESSION['hqs']['id'])) {
@@ -6,3 +6,7 @@ if (!isset($_SESSION['hqs']['id'])) {
 }
 
 ?>
+
+<div class="container">
+    <h1>Página não encontrada!</h1>
+</div>
