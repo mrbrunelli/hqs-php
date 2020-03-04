@@ -31,7 +31,7 @@ if ($_POST) {
   } else {
 
     //verificar se o login existe
-    $sql = "select id, nome, login, senha from usuario where login = ? limit 1";
+    $sql = "select id, nome, login, senha, foto from usuario where login = ? limit 1";
 
     //apontar a conexao com o banco
     //preparar o sql para execução
@@ -42,7 +42,7 @@ if ($_POST) {
 
     //executar o sql
     $consulta->execute();
-
+    
     $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
     //verificar se existe usuario
@@ -51,7 +51,7 @@ if ($_POST) {
     } else if (!password_verify($senha, $dados->senha)) {
       $msg = '<p class="alert alert-danger">Senha incorreta!</p>';
     } else {
-      $_SESSION['hqs'] = array('id' => $dados->id, 'nome' => $dados->nome);
+      $_SESSION['hqs'] = array('id' => $dados->id, 'nome' => $dados->nome, 'foto' => $dados->foto);
       //redirecionar para o home
       $msg = 'Deu certo!';
       //javascript para redirecionar 
