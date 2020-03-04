@@ -9,3 +9,7 @@
 .w-100 {
 	height: 300px;
 }
+
+label {
+	margin-top: 15px;
+}
