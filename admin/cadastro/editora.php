@@ -5,6 +5,28 @@ if (!isset($_SESSION['hqs']['id'])) {
     exit;
 }
 
+// Iniciar as variaveis
+$nome = $site = '';
+
+// Verificar se existe um id
+if (!empty($id)) {
+    // Selecionar os dados do banco
+    $sql = "select * from editora where id = ? limit 1";
+    $consulta = $pdo->prepare($sql);
+    $consulta->bindParam(1, $id);
+
+    // id - linha 255 do index.php
+    $consulta->execute();
+    $dados = $consulta->fetch(PDO::FETCH_OBJ);
+
+    // Separar os dados
+    $id = $dados->id;
+    $nome = $dados->nome;
+    $site = $dados->site;
+} else {
+    $id = '';
+}
+
 ?>
 
 <div class="container">
@@ -18,13 +40,13 @@ if (!isset($_SESSION['hqs']['id'])) {
 
     <form name="cadastro" method="post" action="salvar/editora" data-parsley-validate>
         <label for="id">ID</label>
-        <input type="text" class="form-control" name="id" id="id" readonly>
+        <input type="text" class="form-control" name="id" id="id" readonly value="<?= $id ?>">
 
         <label for="nome">Nome da Editora</label>
-        <input type="text" class="form-control" name="nome" id="nome" required data-parsley-required-message="Preencha este campo">
+        <input type="text" class="form-control" name="nome" id="nome" required data-parsley-required-message="Preencha este campo" value="<?= $nome ?>">
 
         <label for="site">Site da Editora</label>
-        <input type="text" class="form-control" name="site" id="site" required data-parsley-required-message="Preencha este campo">
+        <input type="text" class="form-control" name="site" id="site" required data-parsley-required-message="Preencha este campo" value="<?= $site ?>">
 
         <button type="submit" class="btn btn-success mt-3"><i class="fas fa-check"></i> Gravar Dados</button>
     </form>

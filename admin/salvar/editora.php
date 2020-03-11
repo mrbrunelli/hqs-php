@@ -27,13 +27,14 @@ if ($_POST) {
     }
 
     // Verificar se existe um cadastro com este nome
-    $sql = "select id from editora where nome = ? limit 1";
+    $sql = "select id from editora where nome = ? and id <> ? limit 1";
 
     // Usar o PDO / prepare para executar o sql
     $consulta = $pdo->prepare($sql);
 
     // Passando o parametro
     $consulta->bindParam(1, $nome);
+    $consulta->bindParam(2, $id);
 
     // Executar o sql
     $consulta->execute();

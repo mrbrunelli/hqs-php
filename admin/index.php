@@ -273,7 +273,7 @@ $base     = "$h://$site:$porta/$url";
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2019</span>
+                            <span>Copyright &copy; <code>Matheus R. Brunelli 2020</code></span>
                         </div>
                     </div>
                 </footer>

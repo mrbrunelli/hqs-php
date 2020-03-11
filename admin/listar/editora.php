@@ -30,6 +30,21 @@ if (!isset($_SESSION['hqs']['id'])) {
             $sql = "select * from editora order by nome";
             $consulta = $pdo->prepare($sql);
             $consulta->execute();
+
+            while ($dados = $consulta->fetch(PDO::FETCH_OBJ)) {
+                // Separar os dados
+                $id = $dados->id;
+                $nome = $dados->nome;
+                $site = $dados->site;
+
+                // Mostrar na tela
+                echo '<tr>
+                        <td>' . $id . '</td>
+                        <td>' . $nome . '</td>
+                        <td>' . $site . '</td>
+                        <td><a href="cadastro/editora/' . $id . '" class="btn btn-success btn-sm"><i class="fas fa-edit"></id></td>
+                      </tr>';
+            }
             ?>
         </tbody>
     </table>
