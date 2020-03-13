@@ -19,7 +19,7 @@ if (!isset($_SESSION['hqs']['id'])) {
             <tr>
                 <th>ID</th>
                 <th>Tipo</th>
-                <th></th>
+                <th>Opções</th>
             </tr>
         </thead>
         <tbody>
