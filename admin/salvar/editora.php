@@ -73,7 +73,7 @@ if ($_POST) {
     if ($consulta->execute()) {
         echo '<script>alert("Registro salvo!");location.href="listar/editora";</script>';
     } else {
-        echo '<script>alert("Erro ao salvar!);history.back();</script>';
+        echo '<script>alert("Erro ao salvar!");history.back();</script>';
     }
 } else {
     // Mensagem de erro

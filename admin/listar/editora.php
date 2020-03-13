@@ -42,7 +42,7 @@ if (!isset($_SESSION['hqs']['id'])) {
                         <td>' . $id . '</td>
                         <td>' . $nome . '</td>
                         <td>' . $site . '</td>
-                        <td><a href="cadastro/editora/' . $id . '" class="btn btn-success btn-sm"><i class="fas fa-edit"></id></td>
+                        <td><a href="cadastro/editora/' . $id . '" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></td>
                       </tr>';
             }
             ?>
