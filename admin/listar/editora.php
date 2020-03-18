@@ -42,7 +42,8 @@ if (!isset($_SESSION['hqs']['id'])) {
                         <td>' . $id . '</td>
                         <td>' . $nome . '</td>
                         <td>' . $site . '</td>
-                        <td><a href="cadastro/editora/' . $id . '" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></td>
+                        <td><a href="cadastro/editora/' . $id . '" class="btn btn-success btn-sm" title="Editar"><i class="fas fa-edit"></i></a>
+                        <button class="btn btn-danger btn-sm" title="Deletar" onclick="excluir(' . $id . ')"><i class="fas fa-trash"></i></button></td>
                       </tr>';
             }
             ?>
@@ -50,3 +51,15 @@ if (!isset($_SESSION['hqs']['id'])) {
     </table>
 
 </div>
+
+<script>
+    // Função para perguntar se deseja excluir
+    // Se sim direcionar para o endere;o de exclusão
+    const excluir = (id) => {
+        // Perguntar
+        if (confirm(`Deseja mesmo excluir a editora ${id}?`)) {
+            // Direcionar para a exclusão
+            location.href = `excluir/editora/${id}`
+        }
+    }
+</script>
