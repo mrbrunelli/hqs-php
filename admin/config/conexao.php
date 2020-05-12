@@ -4,7 +4,7 @@
 $servidor = 'localhost';
 $usuario = 'root';
 $senha = '';
-$banco = 'hqs';
+$banco = 'hqs-alfa';
 
 try {
     //criar uma conexão PDO
