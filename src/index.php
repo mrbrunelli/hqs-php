@@ -8,12 +8,12 @@ ini_set('display_startup_erros', 1);
 error_reporting(E_ALL);
 
 //criar conexao com banco com PDO
-$servidor = "localhost";
+$servidor = "hqs-mysql";
 //em 99% dos casos é localhost
 
 //usuario de acesso ao banco
 $usuario = "root";
-$senha = "";
+$senha = "root";
 
 //nome do banco de dados
 $banco = "hqs";
