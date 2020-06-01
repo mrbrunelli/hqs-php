@@ -60,5 +60,28 @@ $consulta->execute();
 
         <label for="valor">Valor</label>
         <input type="text" name="valor" id="valor" class="form-control" required data-parsley-required-message="Preencha este campo">
+
+        <label for="resumo">Resumo / Descrição</label>
+        <textarea name="resumo" id="resumo" required data-parsley-required-message="Preencha este campo" class="form-control"></textarea>
+
+        <button type="submit" class="btn btn-success my-3">
+            <i class="fas fa-check"></i>
+            Gravar Dados
+        </button>
+
     </form>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#resumo').summernote()
+        $('#valor').maskMoney({
+            thousands: ".",
+            decimal: ",",
+            reverse: true,
+            //prefix: "R$ "
+        })
+        $('#data').inputmask("99/99/9999")
+        $('#numero').inputmask("9999")
+    })
+</script>

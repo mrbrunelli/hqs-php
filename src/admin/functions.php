@@ -7,57 +7,63 @@
 	    if ( $msg != 1 ) echo $msg; //deu erro
 	    retornando 1 o documento é inválido
 	*/
-	function validaCPF($cpf) {
-	 
-	    // Extrai somente os números
-	    $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
-	     
-	    // Verifica se foi informado todos os digitos corretamente
-	    if (strlen($cpf) != 11) {
-	        return "O CPF precisa ter ao menos 11 números";
-	    }
-	    // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
-	    if (preg_match('/(\d)\1{10}/', $cpf)) {
-	        return "CPF inválido";
-	    }
-	    // Faz o calculo para validar o CPF
-	    for ($t = 9; $t < 11; $t++) {
-	        for ($d = 0, $c = 0; $c < $t; $c++) {
-	            $d += $cpf{$c} * (($t + 1) - $c);
-	        }
-	        $d = ((10 * $d) % 11) % 10;
-	        if ($cpf{$c} != $d) {
-	            return "CPF inválido";
-	        }
-	    }
-	    return true;
-	}
+function validaCPF($cpf)
+{
 
-	function validaCNPJ($cnpj) {
-	    $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
-	    // Valida tamanho
-	    if (strlen($cnpj) != 14)
-	        return "CNPJ precisa ter ao menos 14 números";
-	    // Valida primeiro dígito verificador
-	    for ($i = 0, $j = 5, $soma = 0; $i < 12; $i++)
-	    {
-	        $soma += $cnpj{$i} * $j;
-	        $j = ($j == 2) ? 9 : $j - 1;
-	    }
-	    $resto = $soma % 11;
-	    if ($cnpj{12} != ($resto < 2 ? 0 : 11 - $resto))
-	        return "CNPJ inválido";
-	    // Valida segundo dígito verificador
-	    for ($i = 0, $j = 6, $soma = 0; $i < 13; $i++)
-	    {
-	        $soma += $cnpj{$i} * $j;
-	        $j = ($j == 2) ? 9 : $j - 1;
-	    }
-	    $resto = $soma % 11;
-	    return $cnpj{13} == ($resto < 2 ? 0 : 11 - $resto);
-	}
+	// Extrai somente os números
+	$cpf = preg_replace('/[^0-9]/is', '', $cpf);
 
-	/*
+	// Verifica se foi informado todos os digitos corretamente
+	if (strlen($cpf) != 11) {
+		return "O CPF precisa ter ao menos 11 números";
+	}
+	// Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+	if (preg_match('/(\d)\1{10}/', $cpf)) {
+		return "CPF inválido";
+	}
+	// Faz o calculo para validar o CPF
+	for ($t = 9; $t < 11; $t++) {
+		for ($d = 0, $c = 0; $c < $t; $c++) {
+			$d += $cpf{
+				$c} * (($t + 1) - $c);
+		}
+		$d = ((10 * $d) % 11) % 10;
+		if ($cpf{
+			$c} != $d) {
+			return "CPF inválido";
+		}
+	}
+	return true;
+}
+
+function validaCNPJ($cnpj)
+{
+	$cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
+	// Valida tamanho
+	if (strlen($cnpj) != 14)
+		return "CNPJ precisa ter ao menos 14 números";
+	// Valida primeiro dígito verificador
+	for ($i = 0, $j = 5, $soma = 0; $i < 12; $i++) {
+		$soma += $cnpj{
+			$i} * $j;
+		$j = ($j == 2) ? 9 : $j - 1;
+	}
+	$resto = $soma % 11;
+	if ($cnpj{
+		12} != ($resto < 2 ? 0 : 11 - $resto))
+		return "CNPJ inválido";
+	// Valida segundo dígito verificador
+	for ($i = 0, $j = 6, $soma = 0; $i < 13; $i++) {
+		$soma += $cnpj{
+			$i} * $j;
+		$j = ($j == 2) ? 9 : $j - 1;
+	}
+	$resto = $soma % 11;
+	return $cnpj{
+		13} == ($resto < 2 ? 0 : 11 - $resto);
+}
+
+/*
 		Função para redimensionar imagens JPG
 		Irá criar 3 imagens: 
 		- G Largura de 800px 
@@ -68,57 +74,91 @@
 		Parâmetros: arquivo da imagem (Ex.: fotos/imagem.jpg), novo nome para renomear (Ex.: 12345)
 	*/
 
-	function redimensionarImagem($pastaFotos,$imagem,$nome)	{
+function redimensionarImagem($pastaFotos, $imagem, $nome)
+{
 
-		$imagem = $pastaFotos.$imagem;
-		
-		list($largura1, $altura1) = getimagesize($imagem);
+	$imagem = $pastaFotos . $imagem;
 
-		$largura = 800;
-		$percent = ($largura/$largura1);
-		$altura = $altura1 * $percent;
+	list($largura1, $altura1) = getimagesize($imagem);
 
-		$imagem_gerada = $pastaFotos.$nome."g.jpg";
-		$path = $imagem;
-		$imagem_orig = ImageCreateFromJPEG($path);
-		$pontoX = ImagesX($imagem_orig);
-		$pontoY = ImagesY($imagem_orig);
-		$imagem_fin = ImageCreateTrueColor($largura, $altura);
-		ImageCopyResampled($imagem_fin, $imagem_orig, 0, 0, 0, 0, $largura+1, $altura+1, $pontoX, $pontoY);
-		ImageJPEG($imagem_fin, $imagem_gerada,100);
-		ImageDestroy($imagem_orig);
-		ImageDestroy($imagem_fin); 
+	$largura = 800;
+	$percent = ($largura / $largura1);
+	$altura = $altura1 * $percent;
 
-		$largura = 640;
-		$percent = ($largura/$largura1);
-		$altura = $altura1 * $percent;
-		
-		$imagem_gerada = $pastaFotos.$nome."m.jpg";
-		$path = $imagem;
-		$imagem_orig = ImageCreateFromJPEG($path);
-		$pontoX = ImagesX($imagem_orig);
-		$pontoY = ImagesY($imagem_orig);
-		$imagem_fin = ImageCreateTrueColor($largura, $altura);
-		ImageCopyResampled($imagem_fin, $imagem_orig, 0, 0, 0, 0, $largura+1, $altura+1, $pontoX, $pontoY);
-		ImageJPEG($imagem_fin, $imagem_gerada,80);
-		ImageDestroy($imagem_orig);
-		ImageDestroy($imagem_fin);
-		
-		$largura = 250;
-		$percent = ($largura/$largura1);
-		$altura = $altura1 * $percent;
+	$imagem_gerada = $pastaFotos . $nome . "g.jpg";
+	$path = $imagem;
+	$imagem_orig = ImageCreateFromJPEG($path);
+	$pontoX = ImagesX($imagem_orig);
+	$pontoY = ImagesY($imagem_orig);
+	$imagem_fin = ImageCreateTrueColor($largura, $altura);
+	ImageCopyResampled($imagem_fin, $imagem_orig, 0, 0, 0, 0, $largura + 1, $altura + 1, $pontoX, $pontoY);
+	ImageJPEG($imagem_fin, $imagem_gerada, 100);
+	ImageDestroy($imagem_orig);
+	ImageDestroy($imagem_fin);
 
-		$imagem_gerada = $pastaFotos.$nome."p.jpg";
-		$path = $imagem;
-		$imagem_orig = ImageCreateFromJPEG($path);
-		$pontoX = ImagesX($imagem_orig);
-		$pontoY = ImagesY($imagem_orig);
-		$imagem_fin = ImageCreateTrueColor($largura, $altura);
-		ImageCopyResampled($imagem_fin, $imagem_orig, 0, 0, 0, 0, $largura+1, $altura+1, $pontoX, $pontoY);
-		ImageJPEG($imagem_fin, $imagem_gerada,80);
-		ImageDestroy($imagem_orig);
-		ImageDestroy($imagem_fin);
-	
-		//apagar a imagem antiga
-		unlink ($imagem);
-	}
+	$largura = 640;
+	$percent = ($largura / $largura1);
+	$altura = $altura1 * $percent;
+
+	$imagem_gerada = $pastaFotos . $nome . "m.jpg";
+	$path = $imagem;
+	$imagem_orig = ImageCreateFromJPEG($path);
+	$pontoX = ImagesX($imagem_orig);
+	$pontoY = ImagesY($imagem_orig);
+	$imagem_fin = ImageCreateTrueColor($largura, $altura);
+	ImageCopyResampled($imagem_fin, $imagem_orig, 0, 0, 0, 0, $largura + 1, $altura + 1, $pontoX, $pontoY);
+	ImageJPEG($imagem_fin, $imagem_gerada, 80);
+	ImageDestroy($imagem_orig);
+	ImageDestroy($imagem_fin);
+
+	$largura = 250;
+	$percent = ($largura / $largura1);
+	$altura = $altura1 * $percent;
+
+	$imagem_gerada = $pastaFotos . $nome . "p.jpg";
+	$path = $imagem;
+	$imagem_orig = ImageCreateFromJPEG($path);
+	$pontoX = ImagesX($imagem_orig);
+	$pontoY = ImagesY($imagem_orig);
+	$imagem_fin = ImageCreateTrueColor($largura, $altura);
+	ImageCopyResampled($imagem_fin, $imagem_orig, 0, 0, 0, 0, $largura + 1, $altura + 1, $pontoX, $pontoY);
+	ImageJPEG($imagem_fin, $imagem_gerada, 80);
+	ImageDestroy($imagem_orig);
+	ImageDestroy($imagem_fin);
+
+	//apagar a imagem antiga
+	unlink($imagem);
+}
+
+/**
+ *	Função para formatar a data
+ *	$data - data a formatar
+ */
+function formatarData($data)
+{
+	// 01/12/2020 -> 2020-12-01
+	$data = explode("/", $data);
+	return $data[2] . "-" . $data[1] . "-" . $data[0];
+}
+
+/**
+ *	Função para retirar _
+ *	$texto - texto a formatar
+ */
+function retirarUnderline($texto)
+{
+	//12__
+	return str_replace("_", "", $texto);
+}
+
+/**
+ *	Função para formatar Valor
+	$valor - texto a formatar
+ */
+function formatarValor($valor)
+{
+	// 12.000,00 -> 12000.00
+	$valor = str_replace(".", "", $valor); //12000,00
+	$valor = str_replace(",", ".", $valor); //12000.00
+	return $valor;
+}
