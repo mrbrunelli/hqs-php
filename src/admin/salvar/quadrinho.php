@@ -8,6 +8,9 @@ if ($_POST) {
     include "functions.php";
     include "config/conexao.php";
 
+    // Inicializar variáveis com valores nulos
+    $id = $titulo = $data = $numero = $valor = $resumo = $tipo_id = $editora_id = "";
+
     foreach ($_POST as $key => $value) {
         $$key = trim($value);
     }
@@ -74,7 +77,7 @@ if ($_POST) {
         }
 
         // Erro ao gravar
-        //echo "<script>alert('Erro ao salvar ou enviar arquivo para o servidor');history.back();</script>";
+        echo "<script>alert('Erro ao salvar ou enviar arquivo para o servidor');history.back();</script>";
         exit;
     }
 

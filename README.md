@@ -1,5 +1,7 @@
 # :books: HQ's | Loja Virtual de venda de quadrinhos
 
+![](https://img.shields.io/github/last-commit/mrbrunelli/hqs-php?style=for-the-badge) ![](https://img.shields.io/github/commit-activity/m/mrbrunelli/hqs-php?style=for-the-badge)
+
 ## Tecnologias utilizadas
 - [x] :whale: Docker
 - [x] :elephant: PHP + Javascript + Apache
@@ -17,4 +19,5 @@
 
 * Listagem de Editoras
 ![](https://i.ibb.co/q5gTjMc/screely-1591051612576.png)
+
 
