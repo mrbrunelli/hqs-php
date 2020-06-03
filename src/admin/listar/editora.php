@@ -15,7 +15,7 @@ if (!isset($_SESSION['hqs']['id'])) {
 
     <div class="clearfix"></div>
 
-    <table class="table table-striped">
+    <table class="table table-striped" id="tabela">
         <thead>
             <tr>
                 <th>ID</th>
@@ -62,4 +62,18 @@ if (!isset($_SESSION['hqs']['id'])) {
             location.href = `excluir/editora/${id}`
         }
     }
+
+    // Adicionar o dataTable na tabela
+    $(document).ready(function() {
+        $('#tabela').DataTable({
+            "language": {
+                "lengthMenu": "Exibindo _MENU_ registros por página",
+                "zeroRecords": "Nenhuma informação encontrada...",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhuma informação disponível",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "search": "Buscar"
+            }
+        })
+    })
 </script>

@@ -30,7 +30,7 @@ $consulta->execute();
 
     <div class="clearfix"></div>
 
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover" id="tabela">
         <thead>
             <tr>
                 <td>ID</td>
@@ -56,8 +56,35 @@ $consulta->execute();
                     <td><?= $dados->data ?></td>
                     <td><?= number_format($dados->valor, 2, ",", ".") ?></td>
                     <td><?= $dados->editora ?></td>
+                    <td>
+                        <a href="cadastro/quadrinho/<?= $dados->id ?>" title="Editar Quadrinho <?= $dados->id ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                        <button class="btn btn-danger btn-sm" title="Deletar Quadrinho <?= $dados->id ?>" onclick="excluir(<?= $dados->id ?>)"><i class="fas fa-trash"></i></button>
+                    </td>
                 </tr>
             <?php endforeach ?>
         </tbody>
     </table>
 </div>
+
+<script>
+    const excluir = (id) => {
+        // Perguntar
+        if (confirm(`Deseja mesmo excluir o quadrinho ${id}?`)) {
+            // Direcionar para a exclusão
+            location.href = `excluir/quadrinho/${id}`
+        }
+    }
+
+    $(document).ready(function() {
+        $('#tabela').DataTable({
+            "language": {
+                "lengthMenu": "Exibindo _MENU_ registros por página",
+                "zeroRecords": "Nenhuma informação encontrada...",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhuma informação disponível",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "search": "Buscar"
+            }
+        })
+    })
+</script>

@@ -50,11 +50,43 @@ if ($_POST) {
         $consulta->bindParam(":editora_id", $editora_id);
     } else {
         // Editar - Update
+        // Qual arquivo irá ser gravado
+        if (!empty($_FILES["capa"]["name"]))
+            $capa = $arquivo;
 
+        $sql = "UPDATE quadrinho SET 
+                    titulo = :titulo,
+                    numero = :numero,
+                    valor = :valor,
+                    resumo = :resumo,
+                    capa = :capa,
+                    tipo_id = :tipo_id,
+                    editora_id = :editora_id,
+                    data = :data
+                WHERE
+                    id = :id LIMIT 1";
+        $consulta = $pdo->prepare($sql);
+        $consulta->bindParam(":titulo", $titulo);
+        $consulta->bindParam(":numero", $numero);
+        $consulta->bindParam(":valor", $valor);
+        $consulta->bindParam(":resumo", $resumo);
+        $consulta->bindParam(":capa", $capa);
+        $consulta->bindParam(":tipo_id", $tipo_id);
+        $consulta->bindParam(":editora_id", $editora_id);
+        $consulta->bindParam(":data", $data);
+        $consulta->bindParam(":id", $id);
     }
 
     // Executar o SQL
     if ($consulta->execute()) {
+
+        // Verificar se o arquivo não está sendo enviado
+        // Capa deve estar vazia e o id não pode estar vazio - editando
+        if ((empty($_FILES["capa"]["type"])) && (!empty($id))) {
+            $pdo->commit();
+            echo "<script>alert('Registro salvo');location.href='listar/quadrinho';</script>";
+            exit;
+        }
 
         // Verificar se o tipo de imagem é JPG
         if ($_FILES["capa"]["type"] != "image/jpeg") {
