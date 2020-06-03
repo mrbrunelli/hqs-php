@@ -1,5 +1,6 @@
 <?php
-//incluir o arquivo da funcao
+
+//incluir o arquivo da função
 include "libs/functions.php";
 
 $cpf = "";

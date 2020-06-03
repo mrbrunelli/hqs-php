@@ -7,7 +7,7 @@
 	    if ( $msg != 1 ) echo $msg; //deu erro
 	    retornando 1 o documento é inválido
 	*/
-function validaCPF($cpf)
+function validaCpf($cpf)
 {
 
 	// Extrai somente os números
