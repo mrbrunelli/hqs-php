@@ -9,15 +9,19 @@
 - [x] :dolphin: MySQL
 - [x] :b: Bootstrap 4 + SB Admin 2
 
-## Layout SB Admin 2
+## :b: Layout SB Admin 2
+![](https://img.shields.io/badge/Created%20By-Matheus%20R.%20Brunelli-brightgreen)
 
-* Tela de Login
+* #### Tela de Login
 ![](https://i.ibb.co/XXCnqgS/screely-1591051089341.png)
 
-* Cadastro de Quadrinhos
+* #### Cadastro de Clientes
+![](https://i.ibb.co/JKCc1Yp/screely-1591291455180.png)
+
+* #### Cadastro de Quadrinhos
 ![](https://i.ibb.co/0Vkg46b/screely-1591051464196.png)
 
-* Listagem de Editoras
+* #### Listagem de Editoras
 ![](https://i.ibb.co/q5gTjMc/screely-1591051612576.png)
 
 
