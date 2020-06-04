@@ -71,7 +71,7 @@ $nome = $cpf = $datanascimento = $email = $senha =
 
             <div class="col-12 col-md-6">
                 <label for="senha2">Confirme a Senha</label>
-                <input type="password" name="senha2" id="senha2" class="form-control">
+                <input type="password" name="senha2" id="senha2" onblur="verificarSenha()" class="form-control">
             </div>
 
             <div class="col-12 col-md-3">
@@ -193,4 +193,17 @@ if (empty($id)) $id = 0
             })
         }
     })
+
+    function verificarSenha() {
+        if ($('#senha').val() != $('#senha2').val()) {
+            $('#senha').val('')
+            $('#senha2').val('')
+            $('#senha2').removeClass('is-valid')
+            $('#senha2').addClass('is-invalid')
+            return alert('As senhas devem ser iguais.')
+        }
+
+        $('#senha2').removeClass('is-invalid')
+        $('#senha2').addClass('is-valid')
+    }
 </script>
