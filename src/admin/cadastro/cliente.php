@@ -9,7 +9,7 @@ if (!isset($id)) $id = '';
 
 $nome = $cpf = $datanascimento = $email = $senha =
     $cep = $endereco = $complemento = $bairro = $cidade_id =
-    $foto = $telefone = $celular = $nome_cidade = $estado = $endereco = $bairro = '';
+    $foto = $telefone = $celular = $nome_cidade = $estado = $endereco = $bairro = $complemento = '';
 
 ?>
 
@@ -94,7 +94,7 @@ $nome = $cpf = $datanascimento = $email = $senha =
                 <input type="text" id="estado" class="form-control" value="<?= $estado ?>">
             </div>
 
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-6">
                 <label for="endereco">Endereço</label>
                 <input type="text" name="endereco" id="endereco" class="form-control" value="<?= $endereco ?>">
             </div>
@@ -102,6 +102,11 @@ $nome = $cpf = $datanascimento = $email = $senha =
             <div class="col-12 col-md-4">
                 <label for="bairro">Bairro</label>
                 <input type="text" name="bairro" id="bairro" class="form-control" value="<?= $bairro ?>">
+            </div>
+
+            <div class="col-12 col-md-2">
+                <label for="complemento">Complemento</label>
+                <input type="text" name="complemento" id="complemento" class="form-control" value="<?= $complemento ?>">
             </div>
         </div>
 
@@ -163,6 +168,23 @@ if (empty($id)) $id = 0
                     logradouro,
                     bairro
                 } = dados
+
+                // Consultar cidade no banco de dados
+                $.get("verificarCidade.php", {
+                        localidade,
+                        uf
+                    },
+                    function(dados) {
+                        // Verificar se retornou dados
+                        if (!dados) return alert('Erro. ID da cidade não encontrado.')
+
+                        // Converter em objeto
+                        dados = JSON.parse(dados)
+
+                        // Inserir id no input
+                        $('#cidade_id').val(dados.id)
+                    }
+                )
 
                 $('#nome_cidade').val(localidade)
                 $('#estado').val(uf)
