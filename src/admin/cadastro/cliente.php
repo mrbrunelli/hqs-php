@@ -9,7 +9,42 @@ if (!isset($id)) $id = '';
 
 $nome = $cpf = $datanascimento = $email = $senha =
     $cep = $endereco = $complemento = $bairro = $cidade_id =
-    $foto = $telefone = $celular = $nome_cidade = $estado = $endereco = $bairro = $complemento = '';
+    $foto = $telefone = $celular = $nome_cidade = $estado = $bairro = $complemento = '';
+
+if (!empty($id)) {
+    $sql = "SELECT
+            c.*,
+            date_format(c.datanascimento, '%d/%m/%Y') datanascimento,
+            ci.cidade,
+            ci.estado
+        FROM cliente c
+        INNER JOIN cidade ci ON ci.id = c.cidade_id
+        WHERE c.id = :id
+        LIMIT 1";
+
+    $consulta = $pdo->prepare($sql);
+    $consulta->bindParam(":id", $id);
+    $consulta->execute();
+    $dados = $consulta->fetch(PDO::FETCH_OBJ);
+
+    $nome = $dados->nome;
+    $cpf = $dados->cpf;
+    $datanascimento = $dados->datanascimento;
+    $email = $dados->email;
+    $telefone = $dados->telefone;
+    $celular = $dados->celular;
+    $cep = $dados->cep;
+    $cidade_id = $dados->cidade_id;
+    $nome_cidade = $dados->cidade;
+    $estado = $dados->estado;
+    $endereco = $dados->endereco;
+    $bairro = $dados->bairro;
+    $complemento = $dados->complemento;
+    $nome = $dados->nome;
+    $foto = $dados->foto;
+
+    $imagem = "../fotos/" . $foto . "p.jpg";
+}
 
 ?>
 
@@ -44,9 +79,24 @@ $nome = $cpf = $datanascimento = $email = $senha =
                 <input type="text" name="datanascimento" id="datanascimento" class="form-control" required data-parsley-required-message="Preencha a data de nascimento" value="<?= $datanascimento ?>" placeholder="Ex: 10/10/1990">
             </div>
 
-            <div class="col-12 col-md-4">
+            <?php
+            $required = "required data-parsley-required-message='Selecione uma foto'";
+            if (!empty($id)) $required = '';
+            ?>
+
+            <div class="col-10 col-md-3">
                 <label for="foto">Foto (.JPG)</label>
-                <input type="file" name="foto" id="foto" class="form-control">
+                <input type="file" accept=".jpg" name="foto" id="foto" <?= $required ?> class="form-control" value="<?= $foto ?>">
+
+                <input type="hidden" name="foto" value="<?= $foto ?>">
+            </div>
+
+            <div class="col-2 col-md-1">
+                <?php
+                if (!empty($foto)) {
+                    echo "<img class='rounded-circle mt-4 shadow-sm' src='$imagem' width='50'><br>";
+                }
+                ?>
             </div>
 
             <div class="col-12 col-md-6">
@@ -66,12 +116,12 @@ $nome = $cpf = $datanascimento = $email = $senha =
 
             <div class="col-12 col-md-6">
                 <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha" class="form-control">
+                <input type="password" name="senha" id="senha" class="form-control" required data-parsley-required-message="Preencha a senha">
             </div>
 
             <div class="col-12 col-md-6">
                 <label for="senha2">Confirme a Senha</label>
-                <input type="password" name="senha2" id="senha2" onblur="verificarSenha()" class="form-control">
+                <input type="password" id="senha2" onblur="verificarSenha()" class="form-control" required data-parsley-required-message="Confirme a senha">
             </div>
 
             <div class="col-12 col-md-3">
