@@ -77,7 +77,8 @@ $consulta->execute();
 
             // while ($d = $consulta->fetch(PDO::FETCH_OBJ)) : 
             ?>
-            //     <option value="<?php // $d->id . ' - ' . $d->nome ?>">
+            //     <option value="<?php // $d->id . ' - ' . $d->nome 
+                                    ?>">
                 <?php // endwhile 
                 ?>
         </datalist> -->
@@ -126,8 +127,14 @@ $consulta->execute();
             <i class="fas fa-check"></i>
             Gravar Dados
         </button>
-
     </form>
+
+    <hr>
+
+    <?php
+    // Verificar se esta sendo editado - include formulario personagem
+    if (!empty($id)) include 'cadastro/formQuadrinho.php';
+    ?>
 </div>
 
 <script type="text/javascript">
