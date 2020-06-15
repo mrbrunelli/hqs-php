@@ -68,17 +68,19 @@ $consulta->execute();
         </select>
 
         <label for="editora_id">Editora</label>
-        <input type="text" name="editora" class="form-control" list="listaEditoras">
+        <!--<input type="text" name="editora" class="form-control" list="listaEditoras">
         <datalist id="listaEditoras">
             <?php
-            $sql = "select id, nome from editora order by nome";
-            $consulta = $pdo->prepare($sql);
-            $consulta->execute();
+            // $sql = "select id, nome from editora order by nome";
+            // $consulta = $pdo->prepare($sql);
+            // $consulta->execute();
 
-            while ($d = $consulta->fetch(PDO::FETCH_OBJ)) : ?>
-                <option value="<?= $d->id . ' - ' . $d->nome ?>">
-                <?php endwhile ?>
-        </datalist>
+            // while ($d = $consulta->fetch(PDO::FETCH_OBJ)) : 
+            ?>
+            //     <option value="<?php // $d->id . ' - ' . $d->nome ?>">
+                <?php // endwhile 
+                ?>
+        </datalist> -->
 
         <select name=" editora_id" id="editora_id" class="form-control" required data-parsley-required-message="Selecione uma editora">
             <option value=""></option>
