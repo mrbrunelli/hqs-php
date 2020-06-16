@@ -19,7 +19,9 @@ if ($_POST) {
         echo "<script>alert('Erro ao adicionar personagem')</script>";
     } else {
         // Inserir dentro do quadrinho_personagem
-        $sql = "INSERT INTO quadrinho_personagem (quadrinho_id, personagem_id) VALUES (:quadrinho_id, :personagem_id)";
+        $sql = "INSERT INTO quadrinho_personagem (quadrinho_id, personagem_id) VALUES 
+                (:quadrinho_id, :personagem_id)";
+
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(":quadrinho_id", $quadrinho_id);
         $consulta->bindParam(":personagem_id", $personagem_id);

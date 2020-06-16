@@ -185,6 +185,7 @@ if (empty($id)) $id = 0
                 cpf: cpf,
                 id: <?= $id ?>
             },
+
             function(dados) {
                 if (dados != '') {
                     // Mostrar o erro retornado
@@ -193,7 +194,6 @@ if (empty($id)) $id = 0
                     // Zerar o CPF
                     $('#cpf').val('')
                 }
-
             }
         )
     }
